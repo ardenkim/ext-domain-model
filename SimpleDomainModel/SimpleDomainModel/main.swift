@@ -39,7 +39,7 @@ public struct Money {
         convertedAmount /= 2
     case "EUR":
         convertedAmount /= 3
-    case "CAD":
+    case "CAN":
         convertedAmount /= 2.5
     default:
         convertedAmount *= 1
@@ -50,7 +50,7 @@ public struct Money {
         convertedAmount *= 2
     case "EUR":
         convertedAmount *= 3
-    case "CAD":
+    case "CAN":
         convertedAmount *= 2.5
     default:
         convertedAmount *= 1
