@@ -86,7 +86,14 @@ open class Job {
     case Hourly(Double)
     case Salary(Int)
     
-//    mutating func
+    mutating func increase(_ amt: Double) {
+        switch self {
+        case .Hourly(let val):
+            self = .Hourly(val + amt)
+        case .Salary(let val):
+            self = .Salary(Int(Double(val) + amt))
+        }
+    }
   }
   
   public init(title : String, type : JobType) {
@@ -104,12 +111,7 @@ open class Job {
   }
   
   open func raise(_ amt : Double) {
-//    switch type {
-//    case .Hourly(let val):
-//        self = .Hourly(val * amt)
-//    case .Salary(let val):
-//        self = .Salary(
-//    }
+    type.increase(amt)
   }
 }
 
