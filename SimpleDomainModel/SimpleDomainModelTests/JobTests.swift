@@ -12,6 +12,11 @@ import SimpleDomainModel
 
 class JobTests: XCTestCase {
   
+    func testDescription() {
+        let job = Job(title: "Guest Lecturer", type: Job.JobType.Salary(1000))
+        XCTAssert(job.description == "Job Title:Guest Lecturer")
+    }
+
   func testCreateSalaryJob() {
     let job = Job(title: "Guest Lecturer", type: Job.JobType.Salary(1000))
     XCTAssert(job.calculateIncome(50) == 1000)

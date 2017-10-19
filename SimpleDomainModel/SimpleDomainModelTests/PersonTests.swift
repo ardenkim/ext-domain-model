@@ -10,6 +10,11 @@ import XCTest
 
 class PersonTests: XCTestCase {
 
+    func testDescription() {
+        let ted = Person(firstName: "Ted", lastName: "Neward", age: 45)
+        XCTAssert(ted.description == "Ted Neward Age:45")
+    }
+
   func testPerson() {
     let ted = Person(firstName: "Ted", lastName: "Neward", age: 45)
     XCTAssert(ted.toString() == "[Person: firstName:Ted lastName:Neward age:45 job:nil spouse:nil]")
@@ -38,7 +43,16 @@ class PersonTests: XCTestCase {
 }
 
 class FamilyTests : XCTestCase {
-  
+    func testDescription() {
+        let ted = Person(firstName: "Ted", lastName: "Neward", age: 45)
+        ted.job = Job(title: "Gues Lecturer", type: Job.JobType.Salary(1000))
+
+        let charlotte = Person(firstName: "Charlotte", lastName: "Neward", age: 45)
+
+        let family = Family(spouse1: ted, spouse2: charlotte)
+
+        XCTAssert(family.description == "There are 2 members in Ted Neward Age:45's family")
+    }
   func testFamily() {
     let ted = Person(firstName: "Ted", lastName: "Neward", age: 45)
     ted.job = Job(title: "Gues Lecturer", type: Job.JobType.Salary(1000))

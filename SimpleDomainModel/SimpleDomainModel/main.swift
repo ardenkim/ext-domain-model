@@ -20,13 +20,28 @@ open class TestMe {
   }
 }
 
+protocol Mathematics {
+    func add(_: Money) -> Money
+    func subtract(_: Money) -> Money
+}
+
+extension Double {
+    var USD : Money { return Money(amount: Int(self), currency: "USD") }
+    var EUR : Money { return Money(amount: Int(self), currency: "EUR") }
+    var GBP : Money { return Money(amount: Int(self), currency: "GBP") }
+    var YEN : Money { return Money(amount: Int(self), currency: "YEN") }
+}
 ////////////////////////////////////
 // Money
 //
-public struct Money {
+public struct Money : CustomStringConvertible, Mathematics {
   public var amount : Int
   public var currency : String
   
+    public var description: String {
+        return "\(currency)\(amount)"
+    }
+
   public func convert(_ to: String) -> Money {
     if (to == self.currency) {
         return self
@@ -78,7 +93,11 @@ public struct Money {
 ////////////////////////////////////
 // Job
 //
-open class Job {
+open class Job : CustomStringConvertible {
+    public var description: String {
+        return "Job Title:\(title)"
+    }
+    
   fileprivate var title : String
   fileprivate var type : JobType
 
@@ -118,7 +137,11 @@ open class Job {
 ////////////////////////////////////
 // Person
 //
-open class Person {
+open class Person : CustomStringConvertible {
+    public var description: String {
+        return "\(firstName) \(lastName) Age:\(age)"
+    }
+    
   open var firstName : String = ""
   open var lastName : String = ""
   open var age : Int = 0
@@ -150,14 +173,18 @@ open class Person {
   }
   
   open func toString() -> String {
-    return "[Person: firstName:\(self.firstName) lastName:\(self.lastName) age:\(self.age) job:\(_job?.title) spouse:\(_spouse?.firstName)]"
+    return "[Person: firstName:\(self.firstName) lastName:\(self.lastName) age:\(self.age) job:\(String(describing: _job?.title)) spouse:\(String(describing: _spouse?.firstName))]"
   }
 }
 
 ////////////////////////////////////
 // Family
 //
-open class Family {
+open class Family : CustomStringConvertible {
+    public var description: String {
+        return "There are \(members.count) members in \(members[0])\'s family"
+    }
+    
   fileprivate var members : [Person] = []
   
   public init(spouse1: Person, spouse2: Person) {

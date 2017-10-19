@@ -21,6 +21,17 @@ class MoneyTests: XCTestCase {
   let fifteenEUR = Money(amount: 15, currency: "EUR")
   let fifteenCAN = Money(amount: 15, currency: "CAN")
   
+    func testDesc() {
+        XCTAssert(tenUSD.description == "USD10")
+        XCTAssert(twelveUSD.description == "USD12")
+        XCTAssert(fiveGBP.description == "GBP5")
+        XCTAssert(fifteenEUR.description == "EUR15")
+        XCTAssert(fifteenCAN.description == "CAN15")
+    }
+    func testExtension() {
+        let ext = 5.0
+        XCTAssert(ext.USD.description == "USD5")
+    }
   func testCanICreateMoney() {
     let oneUSD = Money(amount: 1, currency: "USD")
     XCTAssert(oneUSD.amount == 1)
